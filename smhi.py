@@ -32,7 +32,7 @@ def dataAnalysis():
                 #Appends precipitation to lists
                 percipitation = float(row[3])
                 totalPercipitation += percipitation
-                if(percipitation > 40):
+                if percipitation > 40:
                     extremePercipitationDays+=1
 
             avgPercipitation = totalPercipitation/(365+leapyear)
@@ -41,8 +41,9 @@ def dataAnalysis():
             print(f"year: {date[0]}, average percipitation: {avgPercipitation}")            
             print(f"year: {date[0]}, extreme percipitation days: {extremePercipitationDays}")            
             #print(date) 
-        plt.plot([i for i in range(1899,2019)], totalExtremePercipitation)
-        plt.show()
+        #plt.plot([i for i in range(1899,2019)], totalExtremePercipitation)
+        #plt.show()
+        writeToCSV(percipitationArray)
 
 
 def isLeapYear(year):
@@ -63,5 +64,11 @@ def getRowData(data, row):
     row=data[row][0].split(";")
     date=row[2].split("-")
     return row, date
+
+
+def writeToCSV(data):
+    with open("result.csv", "w") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(data)
 
 dataAnalysis()
