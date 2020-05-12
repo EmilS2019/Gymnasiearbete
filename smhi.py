@@ -9,10 +9,9 @@ def dataAnalysis():
         leapYearOffset=0
         percipitationArray, totalExtremePercipitation = [],[]
         
-        #There are 161 years from 1858 to 2019
-        #41 years between 1858 and 1900
-        #Since this loops from 1900-2019
-        for i in range(41,161):
+        index1900 = 41
+        index2018 = 161
+        for i in range(index1900,index2018):
             #J is the index for first of January 
             j = i*365-345+leapYearOffset
 
