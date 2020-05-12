@@ -7,7 +7,8 @@ def dataAnalysis():
         data=list(csv.reader(csvfile))
         
         leapYearOffset=0
-        percipitationArray=[]
+        percipitationArray, totalExtremePercipitation = [],[]
+        
         #There are 161 years from 1858 to 2019
         #41 years between 1858 and 1900
         #Since this loops from 1900-2019
@@ -15,8 +16,6 @@ def dataAnalysis():
             #J is the index for first of January 
             j = i*365-345+leapYearOffset
 
-            row=data[j][0].split(";")
-            date=row[2].split("-")
             row, date = getRowData(data, j)
 
             leapyear=0
@@ -25,19 +24,27 @@ def dataAnalysis():
                 leapyear=1
 
             avgPercipitation, totalPercipitation = 0,0
+            extremePercipitationDays=0
+            
             for k in range(j, j+365+leapyear):
-                row=data[k][0].split(";")
-                date=row[2].split("-")
-                totalPercipitation += float(row[3])
+                row, date = getRowData(data, k)
+                
+                #Appends precipitation to lists
+                percipitation = float(row[3])
+                totalPercipitation += percipitation
+                if(percipitation > 40):
+                    extremePercipitationDays+=1
 
             avgPercipitation = totalPercipitation/(365+leapyear)
             percipitationArray.append(avgPercipitation)
+            totalExtremePercipitation.append(extremePercipitationDays)
             print(f"year: {date[0]}, average percipitation: {avgPercipitation}")            
+            print(f"year: {date[0]}, extreme percipitation days: {extremePercipitationDays}")            
             #print(date) 
-        plt.plot([i for i in range(1899,2019)], percipitationArray)
+        plt.plot([i for i in range(1899,2019)], totalExtremePercipitation)
         plt.show()
 
-        
+
 def isLeapYear(year):
     year = int(year)
     if (year % 4) == 0:  
