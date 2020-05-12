@@ -42,7 +42,7 @@ def dataAnalysis():
             #print(date) 
         #plt.plot([i for i in range(1899,2019)], totalExtremePercipitation)
         #plt.show()
-        writeToCSV(percipitationArray, "result.csv")
+        writeToCSV(percipitationArray, "resultAverage.csv")
         writeToCSV(totalExtremePercipitation, "resultExtreme.csv")
 
 
