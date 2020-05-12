@@ -42,7 +42,8 @@ def dataAnalysis():
             #print(date) 
         #plt.plot([i for i in range(1899,2019)], totalExtremePercipitation)
         #plt.show()
-        writeToCSV(percipitationArray)
+        writeToCSV(percipitationArray, "result.csv")
+        writeToCSV(totalExtremePercipitation, "resultExtreme.csv")
 
 
 def isLeapYear(year):
@@ -65,8 +66,8 @@ def getRowData(data, row):
     return row, date
 
 
-def writeToCSV(data):
-    with open("result.csv", "w") as csvfile:
+def writeToCSV(data, file):
+    with open(file, "w") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(data)
 
